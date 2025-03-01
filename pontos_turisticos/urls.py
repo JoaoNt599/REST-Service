@@ -14,7 +14,7 @@ router.register(r'atracoes', AtracaoViewSet)
 router.register(r'enderecos', EnderecoViewSet)
 router.register(r'avaliacoes', AvaliacaoViewSet)
 router.register(r'comentarios', ComentarioViewSet)
-router.register(r'pontoturistico', PontoTuristicoViewSet)
+router.register(r'pontoturistico', PontoTuristicoViewSet, basename='PontoTurustico')
 
 
 urlpatterns = [
