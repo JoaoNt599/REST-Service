@@ -1,21 +1,23 @@
-# API Turismo
+# Projeto: API Turismo
 
 
-## Rodando o projeto:
+## Recursos do Projeto:
 
-### Inicializando projeto com Docker:
+- Testes Unitários
+- Throttle
+- Paginação
+- Docker
 
-    docker build -t docker-python .
-    docker run -p 8080:8000 docker-python
+## Rodando o Projeto:
 
-### Startando container criado:
+### Sem Docker:
 
-    docker start 6f3c
+    pip install -r requirements.txt
 
-### Parando o container em execução:
+    python manage.py runserver
 
-    docker stop 6f3c
+### Com Docker:
 
-### Logs do container:
+    docker build -t <appName> .
 
-    docker logs 6f3c
+    docker run -p 8000:8000 <appName>
