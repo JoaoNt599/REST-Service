@@ -7,6 +7,8 @@
 - Throttle
 - Paginação
 - Docker
+- Clean Architecture
+
 
 ## Rodando o Projeto:
 
@@ -18,6 +20,9 @@
 
 ### Com Docker:
 
-    docker build -t <appName> .
+    docker build -t api -f docker/Dockerfile .
 
-    docker run -p 8000:8000 <appName>
+    docker run -p 8000:8000 -v C:/Users/joaon/Desktop/Python/Projeto:/app api
+
+    docker start <id>
+
