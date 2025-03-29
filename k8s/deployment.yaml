@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: postgre
+spec:
+  selector:
+    matchLabels:
+      app: postgre
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgre
+    spec:
+      containers:
+        - name: postgre
+          image: postgres:13.16
+          ports:
+            - containerPort: 5432
+          env: 
+            - name: POSTGRES_PASSWORD
+              value: Pg1234
+            - name: POSTGRES_USER
+              value: api
+            - name: POSTGRES_DB
+              value: api
+---
+apiVersion: v1 
+kind: Service
+metadata: 
+  name: postgre
+spec:
+  type: ClusterIP
+  ports: 
+    - port: 5432
+  selector:
+    app: postgre
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: api
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 1
+  template:
+    metadata:
+      labels: 
+        app: api
+    spec:
+      initContainers:
+        - name: wait-for-db
+          image: busybox
+          command: ['sh', '-c', 'until nc -z postgre 5432; do sleep 2; done']
+      containers:
+        - name: api
+          image: joaodev599/python-api:v2
+          ports: 
+            - containerPort: 8000
+          env:
+            - name: DB_HOST
+              value: postgre
+            - name: DB_USER
+              value: api
+            - name: DB_PASSWORD
+              value: Pg1234
+            - name: DB_NAME
+              value: api
+            - name: DJANGO_SETTINGS_MODULE
+              value: pontos_turisticos.settings
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgre-service
+spec:
+  selector:
+    app: postgre
+  ports:
+    - protocol: TCP
+      port: 5432   
+      targetPort: 5432 
+  type: NodePort  
