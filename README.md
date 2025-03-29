@@ -1,24 +1,27 @@
-# Projeto: API Turismo
+# Project: Tourism API
 
 
-## Recursos do Projeto:
+## 🛠️ Project Resources:
 
-- Testes Unitários
+- Unit Tests 
 - Throttle
-- Paginação
-- Docker
+- Pagination
+- Docker 
+- Kubernetes
+- CI/CD: GitHub Actions
+- Terraform: AWS (in progress)
 - Clean Architecture
+- Deploy: AWS or Heroku
 
+## Running the Project:
 
-## Rodando o Projeto:
-
-### Sem Docker:
+### Django:
 
     pip install -r requirements.txt
 
     python manage.py runserver
 
-### Com Docker:
+### With Docker:
 
     docker build -t joaodev599/python-api:v2 .
 
