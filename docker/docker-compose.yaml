@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  terraform:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: terraform-container
+    volumes:
+      - ../terraform:/workspace 
+      - terraform-state:/terraform_data # separate volume for Terraform state
+      - ~/.aws:/root/.aws
+      - ~/.ssh:/root/.ssh
+    working_dir: /workspace
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+  postgres:
+    image: postgres:13.16
+    container_name: postgres_api
+    environment:
+      POSTGRES_USER: api
+      POSTGRES_PASSWORD: Pg1234
+      POSTGRES_DB: api
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  terraform-state:
+  postgres_data:
+    driver: local
