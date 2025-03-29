@@ -13,19 +13,36 @@
 - Clean Architecture
 - Deploy: AWS or Heroku
 
-## Running the Project:
+## Running the Project
 
-### Django:
+## Django:
+
+### Install dependencies:
 
     pip install -r requirements.txt
 
+### Run server: 
+
     python manage.py runserver
 
-### With Docker:
+## Docker:
+
+### Image:
 
     docker build -t joaodev599/python-api:v2 .
 
+### Container:
+
     docker container run -d -p 8000:8000 --name python-api joaodev599/python-api:v2
 
+### Run 
+    
     docker start python-api
+
+## Tests:
+
+### Atrações Test:
+
+    python manage.py test atracoes
+
 
