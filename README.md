@@ -20,9 +20,9 @@
 
 ### Com Docker:
 
-    docker build -t api -f docker/Dockerfile .
+    docker build -t joaodev599/python-api:v2 .
 
-    docker run -p 8000:8000 -v C:/Users/joaon/Desktop/Python/Projeto:/app api
+    docker container run -d -p 8000:8000 --name python-api joaodev599/python-api:v2
 
-    docker start <id>
+    docker start python-api
 
