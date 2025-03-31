@@ -65,7 +65,7 @@ resource "aws_route_table_association" "a" {
 
 # KEY PAIR
 resource "aws_key_pair" "my_key_pair" {
-  key_name   = "my-key-pair"
+  key_name   = "my-key-pair-tst"
  public_key = file("~/.ssh/id_rsa.pub")  
 }
 

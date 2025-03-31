@@ -41,6 +41,38 @@ jobs:
           tags: | 
             joaodev599/python-api:v${{ github.run_number }}
             joaodev599/python-api:latest
+  
+  Infrastructure:
+    needs: [CI]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4.2.2
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.6.0"
+
+      - name: Initialize Terraform
+        run: |
+          cd terraform
+          terraform init
+
+      - name: Plan Terraform Changes
+        run: |
+          cd terraform
+          terraform plan -out=tfplan
+
+      - name: Apply Terraform Changes
+        run: |
+          cd terraform
+          terraform apply -auto-approve
+      
+      - name: Destroy Terraform Changes
+        run: |
+          cd terraform
+          terraform destroy --auto-approve
 
   CD:
     needs: [CI]
