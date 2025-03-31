@@ -58,6 +58,11 @@ jobs:
         run: |
           cd terraform
           terraform init
+      
+      - name: Create Terraform Data Directory
+        run: |
+          sudo mkdir -p /terraform_data
+          sudo chmod 777 /terraform_data
 
       - name: Plan Terraform Changes
         run: |
