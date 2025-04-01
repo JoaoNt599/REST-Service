@@ -54,6 +54,27 @@ jobs:
         with:
           terraform_version: "1.6.0"
 
+      - name: Generate SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keygen -t rsa -b 4096 -C "github-actions" -f ~/.ssh/id_rsa -N ""
+      
+      # - name: Save SSH Private Key
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: ssh-private-key
+      #     path: ~/.ssh/id_rsa
+      #     retention-days: 1
+      
+      # - name: Retrieve SSH Private Key
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: ssh-private-key
+      #     path: ~/.ssh
+
+      # - name: Set SSH Key Permissions
+      #   run: chmod 600 ~/.ssh/id_rsa
+
       - name: Initialize Terraform
         run: |
           cd terraform
