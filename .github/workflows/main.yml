@@ -31,7 +31,7 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git add ./src/requirements.txt
           git commit -m "Update requirements.txt [CI]" || echo "No changes to commit"
-          git push
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/JoaoNt599/REST-Service.git HEAD:main
 
       - name: Run Tests
         run: |
