@@ -6,6 +6,7 @@
 - Unit Tests 
 - Throttle
 - Pagination
+- Filter
 - Docker 
 - Kubernetes
 - CI/CD: GitHub Actions
