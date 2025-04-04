@@ -2,6 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from comentarios.models import Comentario
 from .serializers import ComentarioSerializer
 from rest_framework.pagination import PageNumberPagination
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 class ComentarioPagination(PageNumberPagination):
@@ -13,3 +14,11 @@ class ComentarioViewSet(ModelViewSet):
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     pagination_class = ComentarioPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        'id': ['exact'],
+        'usuario': ['exact'],
+        'comentario': ['exact', 'icontains'],
+        'data': ['exact', 'date'],
+        'aprovado': ['exact'],
+    }

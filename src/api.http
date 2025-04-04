@@ -4,3 +4,23 @@ GET http://127.0.0.1:8000/atracoes/
 GET http://127.0.0.1:8000/enderecos/
 GET http://127.0.0.1:8000/avaliacoes/
 GET http://127.0.0.1:8000/pontoturistico/
+
+
+
+Filter Example
+
+http://localhost:8000/avaliacoes/?comentario=postman
+
+http://localhost:8000/pontoturistico/?id=4&nome=Nome&descricao=Descricao
+
+http://localhost:8000/enderecos/?id=1
+http://localhost:8000/enderecos/?cidade=Sorocaba
+http://localhost:8000/enderecos/?cidade=Toquio
+http://localhost:8000/enderecos/?pais=Japão
+http://localhost:8000/enderecos/?linha1=Monte Fuji
+
+http://localhost:8000/comentarios/?id=3
+http://localhost:8000/comentarios/?usuario=1
+http://localhost:8000/comentarios/?comentario__icontains=aprovado
+http://localhost:8000/comentarios/?comentario__icontains=monte
+http://localhost:8000/comentarios/?data__date=2025-03-01
