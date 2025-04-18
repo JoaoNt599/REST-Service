@@ -3,6 +3,7 @@
 
 ## 🛠️ Project Resources:
 
+- Decorators
 - Unit Tests 
 - Throttle
 - Pagination

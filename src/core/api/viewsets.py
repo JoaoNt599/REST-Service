@@ -75,7 +75,7 @@ class PontoTuristicoViewSet(ModelViewSet):
 
     # PUT
     def update(self, request, *args, **kwargs):
-        return super().updade(request, *args, **kwargs)
+        return super().update(request, *args, **kwargs)
 
     # PATH
     def partial_update(self, request, *args, **kwargs):
