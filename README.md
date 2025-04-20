@@ -1,5 +1,6 @@
 # Project: Tourism API
 
+REST service with authentication, throttling, automated deployment on AWS via GitHub Actions, orchestration with Kubernetes and infrastructure provisioning with Terraform to ensure scalability and automation of the environment.
 
 ## 🛠️ Project Resources:
 
