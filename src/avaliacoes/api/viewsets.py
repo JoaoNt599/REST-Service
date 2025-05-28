@@ -5,6 +5,7 @@ from .serializers import AvaliacaoSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from .filters import AvaliacaoFilter
+from rest_framework.permissions import IsAuthenticated
 
 class AvaliacaoPagination(PageNumberPagination):
     page_size = 10  
@@ -22,6 +23,7 @@ class AvaliacaoFilter(django_filters.FilterSet):
         fields = ["user", "comentario", "nota", "data"]
 
 class AvaliacaoViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Avaliacao.objects.all().order_by('id')
     serializer_class = AvaliacaoSerializer
     pagination_class = AvaliacaoPagination

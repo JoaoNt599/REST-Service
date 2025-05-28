@@ -3,6 +3,7 @@ from enderecos.models import Endereco
 from .serializers import EnderecoSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 
 
 class EnderecoPagination(PageNumberPagination):
@@ -11,6 +12,7 @@ class EnderecoPagination(PageNumberPagination):
     max_page_size = 100
 
 class EnderecoViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Endereco.objects.all()
     serializer_class = EnderecoSerializer
     pagination_class = EnderecoPagination

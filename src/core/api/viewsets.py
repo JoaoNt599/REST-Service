@@ -6,6 +6,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import action
 from core.models import PontoTuristico
 from  .serializers import PontoTuristicoSerializer
+from rest_framework.permissions import IsAuthenticated
 
 
 class PontoTuristicoFilter(django_filters.FilterSet):
@@ -17,6 +18,7 @@ class PontoTuristicoFilter(django_filters.FilterSet):
         fields = ['nome', 'descricao']
 
 class PontoTuristicoViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
     filter_backends = [DjangoFilterBackend]

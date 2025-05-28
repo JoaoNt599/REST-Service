@@ -3,7 +3,7 @@ from comentarios.models import Comentario
 from .serializers import ComentarioSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
-
+from rest_framework.permissions import IsAuthenticated
 
 class ComentarioPagination(PageNumberPagination):
     page_size = 10  
@@ -11,6 +11,7 @@ class ComentarioPagination(PageNumberPagination):
     max_page_size = 100
 
 class ComentarioViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Comentario.objects.all()
     serializer_class = ComentarioSerializer
     pagination_class = ComentarioPagination

@@ -3,6 +3,7 @@ from atracoes.models import Atracao
 from .serializers import AtracaoSerializer
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 
 
 class AtracaoPagination(PageNumberPagination):
@@ -12,6 +13,7 @@ class AtracaoPagination(PageNumberPagination):
 
 
 class AtracaoViewSet(ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Atracao.objects.all()
     serializer_class = AtracaoSerializer
     pagination_class = AtracaoPagination
