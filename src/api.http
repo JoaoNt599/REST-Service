@@ -6,6 +6,12 @@ GET http://127.0.0.1:8000/avaliacoes/
 GET http://127.0.0.1:8000/pontoturistico/
 
 
+Swagger: http://127.0.0.1:8000/api/schema/swagger/
+
+Redoc: http://127.0.0.1:8000/api/schema/redoc/
+
+OpenAPI JSON: http://127.0.0.1:8000/api/schema/?format=json
+
 
 Filter Example
 

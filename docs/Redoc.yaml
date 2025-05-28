@@ -1,0 +1,1455 @@
+openapi: 3.0.3
+info:
+  title: ''
+  version: 0.0.0
+paths:
+  /api/schema/:
+    get:
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /atracoes/:
+    get:
+      operationId: atracoes_list
+      parameters:
+      - in: query
+        name: descricao__icontains
+        schema:
+          type: string
+      - in: query
+        name: nome__icontains
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - atracoes
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAtracaoList'
+          description: ''
+    post:
+      operationId: atracoes_create
+      tags:
+      - atracoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Atracao'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Atracao'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Atracao'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atracao'
+          description: ''
+  /atracoes/{id}/:
+    get:
+      operationId: atracoes_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this atracao.
+        required: true
+      tags:
+      - atracoes
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atracao'
+          description: ''
+    put:
+      operationId: atracoes_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this atracao.
+        required: true
+      tags:
+      - atracoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Atracao'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Atracao'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Atracao'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atracao'
+          description: ''
+    patch:
+      operationId: atracoes_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this atracao.
+        required: true
+      tags:
+      - atracoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAtracao'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAtracao'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAtracao'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Atracao'
+          description: ''
+    delete:
+      operationId: atracoes_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this atracao.
+        required: true
+      tags:
+      - atracoes
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /avaliacoes/:
+    get:
+      operationId: avaliacoes_list
+      parameters:
+      - in: query
+        name: comentario
+        schema:
+          type: string
+      - in: query
+        name: data
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: nota
+        schema:
+          type: number
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: user
+        schema:
+          type: integer
+      tags:
+      - avaliacoes
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedAvaliacaoList'
+          description: ''
+    post:
+      operationId: avaliacoes_create
+      tags:
+      - avaliacoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Avaliacao'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Avaliacao'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Avaliacao'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Avaliacao'
+          description: ''
+  /avaliacoes/{id}/:
+    get:
+      operationId: avaliacoes_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this avaliacao.
+        required: true
+      tags:
+      - avaliacoes
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Avaliacao'
+          description: ''
+    put:
+      operationId: avaliacoes_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this avaliacao.
+        required: true
+      tags:
+      - avaliacoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Avaliacao'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Avaliacao'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Avaliacao'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Avaliacao'
+          description: ''
+    patch:
+      operationId: avaliacoes_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this avaliacao.
+        required: true
+      tags:
+      - avaliacoes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedAvaliacao'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedAvaliacao'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedAvaliacao'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Avaliacao'
+          description: ''
+    delete:
+      operationId: avaliacoes_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this avaliacao.
+        required: true
+      tags:
+      - avaliacoes
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /comentarios/:
+    get:
+      operationId: comentarios_list
+      parameters:
+      - in: query
+        name: aprovado
+        schema:
+          type: boolean
+      - in: query
+        name: comentario
+        schema:
+          type: string
+      - in: query
+        name: comentario__icontains
+        schema:
+          type: string
+      - in: query
+        name: data
+        schema:
+          type: string
+          format: date-time
+      - in: query
+        name: data__date
+        schema:
+          type: string
+          format: date
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: usuario
+        schema:
+          type: integer
+      tags:
+      - comentarios
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedComentarioList'
+          description: ''
+    post:
+      operationId: comentarios_create
+      tags:
+      - comentarios
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+          description: ''
+  /comentarios/{id}/:
+    get:
+      operationId: comentarios_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comentario.
+        required: true
+      tags:
+      - comentarios
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+          description: ''
+    put:
+      operationId: comentarios_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comentario.
+        required: true
+      tags:
+      - comentarios
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Comentario'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+          description: ''
+    patch:
+      operationId: comentarios_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comentario.
+        required: true
+      tags:
+      - comentarios
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedComentario'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedComentario'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedComentario'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comentario'
+          description: ''
+    delete:
+      operationId: comentarios_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this comentario.
+        required: true
+      tags:
+      - comentarios
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /enderecos/:
+    get:
+      operationId: enderecos_list
+      parameters:
+      - in: query
+        name: cidade
+        schema:
+          type: string
+      - in: query
+        name: estado
+        schema:
+          type: string
+      - in: query
+        name: id
+        schema:
+          type: integer
+      - in: query
+        name: linha1
+        schema:
+          type: string
+      - in: query
+        name: linha2
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: query
+        name: pais
+        schema:
+          type: string
+      tags:
+      - enderecos
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEnderecoList'
+          description: ''
+    post:
+      operationId: enderecos_create
+      tags:
+      - enderecos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endereco'
+          description: ''
+  /enderecos/{id}/:
+    get:
+      operationId: enderecos_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this endereco.
+        required: true
+      tags:
+      - enderecos
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endereco'
+          description: ''
+    put:
+      operationId: enderecos_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this endereco.
+        required: true
+      tags:
+      - enderecos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endereco'
+          description: ''
+    patch:
+      operationId: enderecos_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this endereco.
+        required: true
+      tags:
+      - enderecos
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEndereco'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEndereco'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEndereco'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Endereco'
+          description: ''
+    delete:
+      operationId: enderecos_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this endereco.
+        required: true
+      tags:
+      - enderecos
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /pontoturistico/:
+    get:
+      operationId: pontoturistico_list
+      parameters:
+      - in: query
+        name: descricao
+        schema:
+          type: string
+      - in: query
+        name: nome
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - pontoturistico
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPontoTuristicoList'
+          description: ''
+    post:
+      operationId: pontoturistico_create
+      tags:
+      - pontoturistico
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoTuristico'
+          description: ''
+  /pontoturistico/{id}/:
+    get:
+      operationId: pontoturistico_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ponto turistico.
+        required: true
+      tags:
+      - pontoturistico
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoTuristico'
+          description: ''
+    put:
+      operationId: pontoturistico_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ponto turistico.
+        required: true
+      tags:
+      - pontoturistico
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoTuristico'
+          description: ''
+    patch:
+      operationId: pontoturistico_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ponto turistico.
+        required: true
+      tags:
+      - pontoturistico
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPontoTuristico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPontoTuristico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPontoTuristico'
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoTuristico'
+          description: ''
+    delete:
+      operationId: pontoturistico_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ponto turistico.
+        required: true
+      tags:
+      - pontoturistico
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /pontoturistico/{id}/denunciar/:
+    get:
+      operationId: pontoturistico_denunciar_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ponto turistico.
+        required: true
+      tags:
+      - pontoturistico
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoTuristico'
+          description: ''
+    post:
+      operationId: pontoturistico_denunciar_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this ponto turistico.
+        required: true
+      tags:
+      - pontoturistico
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PontoTuristico'
+        required: true
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PontoTuristico'
+          description: ''
+components:
+  schemas:
+    Atracao:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 150
+        descricao:
+          type: string
+        horario_funcionamento:
+          type: string
+        idade_minima:
+          type: integer
+        foto:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - descricao
+      - horario_funcionamento
+      - id
+      - idade_minima
+      - nome
+    Avaliacao:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        comentario:
+          type: string
+          nullable: true
+        nota:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,2})?$
+        data:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - data
+      - id
+      - nota
+      - user
+    Comentario:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        usuario:
+          type: integer
+        comentario:
+          type: string
+        data:
+          type: string
+          format: date-time
+          readOnly: true
+        aprovado:
+          type: boolean
+      required:
+      - comentario
+      - data
+      - id
+      - usuario
+    Endereco:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        linha1:
+          type: string
+          maxLength: 150
+        linha2:
+          type: string
+          nullable: true
+          maxLength: 150
+        cidade:
+          type: string
+          maxLength: 100
+        estado:
+          type: string
+          maxLength: 50
+        pais:
+          type: string
+          maxLength: 70
+        latitude:
+          type: integer
+          nullable: true
+        longitude:
+          type: integer
+          nullable: true
+      required:
+      - cidade
+      - estado
+      - id
+      - linha1
+      - pais
+    PaginatedAtracaoList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Atracao'
+    PaginatedAvaliacaoList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Avaliacao'
+    PaginatedComentarioList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comentario'
+    PaginatedEnderecoList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Endereco'
+    PaginatedPontoTuristicoList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/PontoTuristico'
+    PatchedAtracao:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 150
+        descricao:
+          type: string
+        horario_funcionamento:
+          type: string
+        idade_minima:
+          type: integer
+        foto:
+          type: string
+          format: uri
+          nullable: true
+    PatchedAvaliacao:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          type: integer
+        comentario:
+          type: string
+          nullable: true
+        nota:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,1}(?:\.\d{0,2})?$
+        data:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedComentario:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        usuario:
+          type: integer
+        comentario:
+          type: string
+        data:
+          type: string
+          format: date-time
+          readOnly: true
+        aprovado:
+          type: boolean
+    PatchedEndereco:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        linha1:
+          type: string
+          maxLength: 150
+        linha2:
+          type: string
+          nullable: true
+          maxLength: 150
+        cidade:
+          type: string
+          maxLength: 100
+        estado:
+          type: string
+          maxLength: 50
+        pais:
+          type: string
+          maxLength: 70
+        latitude:
+          type: integer
+          nullable: true
+        longitude:
+          type: integer
+          nullable: true
+    PatchedPontoTuristico:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+        descricao:
+          type: string
+        aprovado:
+          type: boolean
+        foto:
+          type: string
+          format: uri
+          nullable: true
+    PontoTuristico:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+        descricao:
+          type: string
+        aprovado:
+          type: boolean
+        foto:
+          type: string
+          format: uri
+          nullable: true
+      required:
+      - descricao
+      - id
+      - nome
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
