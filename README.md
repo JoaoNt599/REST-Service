@@ -1,22 +1,27 @@
 # Project: Tourism API
 
-REST service with authentication, throttling, automated deployment on AWS via GitHub Actions, orchestration with Kubernetes and infrastructure provisioning with Terraform to ensure scalability and automation of the environment.
+REST service with authentication, throttling, automated deployment on AWS GitHub Actions, orchestration with Kubernetes and infrastructure provisioning with Terraform to ensure scalability and automation of the environment.
 
-## 🛠️ Project Resources:
 
-- Decorators
-- Unit Tests 
-- Throttle
-- Pagination
-- Filter
-- Docker 
+## 1.  Project Resources:
+
+
+- Decorators        (Validators)
+- JWT               (Authetication)
+- Swagger           (Documentation)
+- Unit Tests        (TestCase)
+- Throttle          (Rate limiting)
+- Docker        
 - Kubernetes
-- CI/CD: GitHub Actions
-- Terraform: AWS (in progress)
+- CI/CD             (GitHub Actions)
+- Terraform         (EC2 in progress)
+- PostgreSQL        (S3 in progress)
 - Clean Architecture
-- Deploy: AWS or Heroku
+- Deploy            (AWS or Heroku)
 
-## Running the Project
+
+
+## 2. Running the Project
 
 ## Django:
 
